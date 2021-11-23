@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
     <title>
-        Product List Page 
+        Warehouse list Page 
     </title>
 </head>
 
@@ -33,7 +33,6 @@
                <br/>
                <br/>
                <!-------------------------------->
-
                <div class="CRUDF">
                  <button>Add <i class="fas fa-plus"></i></button>
 
@@ -47,14 +46,14 @@
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Part No</th>
-      <th scope="col">Barcode</th>
-      <th scope="col">Category</th>
-      <th scope="col">Brand</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Photo</th>
-      <th scope="col">Inventory</th>
+      <th scope="col">Company Name</th>
+      <th scope="col">Contact Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Website</th>
+      <th scope="col">Logo</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">Telephone</th>
+      
      
      
       
@@ -66,45 +65,21 @@
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>Mark</td>
+      <td>Aramco</td>
+      <td>Ahmed isamil</td>
+      <td>ahmed@Aramco.com</td>
+      <td>www.Aramco.com</td>
+      <td>path for logo image</td>
+      <td>+966 0547078933</td>
+      <td>+966 013 8160654</td>
+     
      
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-     
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      
-
-    </tr>
+    
   </tbody>
 </table>
 
-<div class="CRUDF">
+                <div class="CRUDF">
 
                  <button>Back <i class="fas fa-step-backward"></i></button>
 

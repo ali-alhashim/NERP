@@ -47,11 +47,39 @@
                 <td>status</td>
             </tr>
        </thead>
+       <tbody>
+           <td>1</td>
+           <td>send proposal for Road Alaua project</td>
+           <td>Hatem</td>
+           <td> 11 - 23 - 2021 </td>
+           <td> 11 - 24 - 2021 </td>
+           <td> open </td>
+      </tbody>
     </table>
     
     
   </div>
 </div>
+
+
+<div class="CRUDF">
+
+                 <button>Back <i class="fas fa-step-backward"></i></button>
+
+                 Page No : <input type="text" size="5"/> Of 50  
+                 | Show Records Per Page 
+                 <select>
+                   <option>10</option>
+                   <option>20</option>
+                   <option>30</option>
+                   <option>40</option>
+                   <option>All</option>
+                  </select>
+
+                 <button>Next <i class="fas fa-step-forward"></i></button>
+
+               
+                </div>
                <!------------------------------->
            </div>
        </div>

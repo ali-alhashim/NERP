@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
     <title>
-        Dashboard Page 
+        Suppliers List Page 
     </title>
 </head>
 
@@ -33,6 +33,15 @@
                <br/>
                <br/>
                <!-------------------------------->
+               <div class="CRUDF">
+                 <button>Add <i class="fas fa-plus"></i></button>
+
+                 <button>Select All <i class="far fa-check-square"></i></button>
+
+                 <button>Search <i class="fas fa-search"></i></button>
+
+                 <button>Delete <i class="fas fa-trash"></i></button>
+                </div>
                <table class="table table-bordered table-hover">
   <thead>
     <tr>
@@ -69,6 +78,24 @@
     
   </tbody>
 </table>
+<div class="CRUDF">
+
+                 <button>Back <i class="fas fa-step-backward"></i></button>
+
+                 Page No : <input type="text" size="5"/> Of 50  
+                 | Show Records Per Page 
+                 <select>
+                   <option>10</option>
+                   <option>20</option>
+                   <option>30</option>
+                   <option>40</option>
+                   <option>All</option>
+                  </select>
+
+                 <button>Next <i class="fas fa-step-forward"></i></button>
+
+               
+                </div>
                <!------------------------------->
            </div>
        </div>
