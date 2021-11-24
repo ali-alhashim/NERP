@@ -48,13 +48,13 @@
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Part No</th>
-      <th scope="col">Barcode</th>
+      <th scope="col">Model</th>
       <th scope="col">Category</th>
       <th scope="col">Brand</th>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col">Photo</th>
-      <th scope="col">Inventory</th>
+      <th scope="col">location</th>
      
      
       
