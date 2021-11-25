@@ -1,5 +1,6 @@
 
  <?php
+           session_start();
            include "share/_DBconnect.php";
 ?>
 
@@ -31,6 +32,7 @@
            <div class="product-container">
                <br/>
                <!-------------------------------->
+               Welcome : <?php echo($_SESSION['username']); ?>
                <div class="card">
   <h5 class="card-header">Your Task</h5>
   <div class="card-body">

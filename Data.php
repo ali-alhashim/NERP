@@ -111,11 +111,5 @@
            ?>   
 </body>
 
-<script>
-                                $(document).ready(function () {
-                                    $("#photoAvtar").click(function () {
-                                       $("#uploadPhoto").click();
-                                    });
-                                });
-                              </script>
+                             
 </html>
