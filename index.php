@@ -10,6 +10,8 @@ if(file_exists("share/_keyData.php"))
 else{
 
     //echo("the file Not exists");
+    // go to setup.php 
+    header("Location: setup.php");
 }
 
 ?>
