@@ -35,7 +35,7 @@
                <!-------------------------------->
 
                <div class="CRUDF">
-                 <button>Add <i class="fas fa-plus"></i></button>
+                 <button data-toggle="modal" data-target="#AddProductModal">Add <i class="fas fa-plus"></i></button>
 
                  <button>Select All <i class="far fa-check-square"></i></button>
 
@@ -134,6 +134,173 @@
     <?php
            include "share/_footer.php";
            ?>   
+
+
+<!-- Modal ----------------------------------------------------------------------->
+<div id="AddProductModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+      <h4 class="modal-title">Add Product</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+       
+      </div>
+      <div class="modal-body">
+       <!-------------------------->
+       
+      <table>
+
+        <tr>
+          <td> Part Number </td>
+          <td> <input type="text" placeholder="Part Number"/> </td>
+       </tr>
+         
+
+       <tr>
+          <td> Barcode </td>
+          <td> <input type="text" placeholder="Barcode"/> </td>
+       </tr>
+
+       <tr>
+          <td> Category </td>
+          <td> 
+            <select>
+              <option>IT Device</option>
+              <option>Lighting Fixures</option>
+           </select>
+         </td>
+       </tr>
+
+
+       <tr>
+          <td> Brand </td>
+          <td> <input type="text" placeholder="Brand"/> </td>
+       </tr>
+
+       <tr>
+          <td> Product Name </td>
+          <td> <input type="text" placeholder="Product Name"/> </td>
+       </tr>
+
+
+       <tr>
+          <td> Description </td>
+          <td> <input type="text" placeholder="Description"/> </td>
+       </tr>
+
+       <tr>
+          <td> photo </td>
+          <td> <img src="http://ztleds.com/upload/2015-12-18/20151218101816632.gif" width="150px" hight="150px" alt="product photo"/> </td>
+       </tr>
+
+
+       <tr>
+          <td> Inventory </td>
+          <td> <input type="text" placeholder="Inventory"/> </td>
+       </tr>
+
+       <tr>
+          <td> Datasheet </td>
+          <td> <input type="file" name="datasheet"/> </td>
+       </tr>
+
+
+
+       <tr>
+          <td> UOM </td>
+          <td> 
+            <select>
+              <option>EACH</option>
+              <option>Meter</option>
+              <option>Box</option>
+           </select>
+         </td>
+       </tr>
+
+
+       <tr>
+          <td> Cost </td>
+          <td> <input type="text" placeholder="Cost"/> </td>
+       </tr>
+
+       <tr>
+          <td> indirect cost </td>
+          <td> <input type="text" placeholder="indirect cost"/> </td>
+       </tr>
+
+
+       <tr>
+          <td> total cost </td>
+          <td> <input type="text" placeholder="total cost"/> </td>
+       </tr>
+
+       <tr>
+          <td> sale price </td>
+          <td> <input type="text" placeholder="sale price"/> </td>
+       </tr>
+
+
+       <tr>
+          <td> profit </td>
+          <td> <input type="text" placeholder="profit"/> </td>
+       </tr>
+
+       <tr>
+          <td> status </td>
+          <td> <input type="text" placeholder="status"/> </td>
+       </tr>
+
+
+       <tr>
+          <td> environment </td>
+          <td> 
+            <select>
+              <option>Indoor</option>
+              <option>Outdoor</option>
+              <option>Industrial</option>
+           </select>
+         </td>
+       </tr>
+
+
+       <tr>
+          <td> Wattage </td>
+          <td> <input type="text" placeholder="Wattage"/> </td>
+       </tr>
+
+       <tr>
+          <td> Luminous </td>
+          <td> <input type="text" placeholder="Luminous"/> </td>
+       </tr>
+
+       <tr>
+          <td> Color </td>
+          <td> <input type="text" placeholder="Color"/> </td>
+       </tr>
+
+      
+
+
+
+
+
+
+
+
+      </table> 
+       
+       <!-------------------------->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!------ End Modal --------------------------------------------------->
 </body>
 
 
