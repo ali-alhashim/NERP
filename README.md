@@ -19,3 +19,12 @@ written by php + js + mysql + html + css + Bootstrap
 <li>Projects</li>
 </ol>
 
+<hr>
+Setup and install : - 
+<br/>
+to setup the application delete the file name [_keyData.php] in share folder 
+<br/>
+Apache HTTP Server or localhost with XAMPP open the folder index page will redirect you 
+<br/>
+to setup.php -> install.php -> login.php 
+
