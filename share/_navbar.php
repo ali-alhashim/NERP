@@ -52,11 +52,13 @@
                      <li class="nav-tabs dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label"><i class="fas fa-user-tie"></i> Sales</span> <span class="caret"></span></a>
                      <ul class="dropdown-menu">
+                     <li class="dropdown-item"><a href="customersRFQ.php"><i class="fas fa-comments-dollar"></i> Customers RFQ</a></li>
                      <li class="dropdown-item"><a href="proposals.php"><i class="fas fa-file-alt"></i> Proposals</a></li>
                      <li class="dropdown-item"><a href="customersPO.php"><i class="fas fa-shopping-cart"></i> Customers Purchase Orders</a></li>
                      <li class="dropdown-item"><a href="SalesDeliveryNote.php"><i class="fas fa-people-carry"></i> Sales Delivery note </a></li>
+                     <li class="dropdown-item"><a href=" PerformaInvoice.php"><i class="fas fa-file-invoice-dollar"></i>  Performa invoice </a></li>
                      <li class="dropdown-item"><a href="salesInvoice.php"><i class="fas fa-file-invoice-dollar"></i> Sales invoice </a></li>
-                     <li class="dropdown-item"><a href="customersRFQ.php"><i class="fas fa-comments-dollar"></i> Customers RFQ</a></li>
+                    
                      </ul>
                      </li>
 

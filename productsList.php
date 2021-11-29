@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
+
+   
+
     <title>
         Product List Page 
     </title>
@@ -37,7 +40,7 @@
                <div class="CRUDF">
                  <button data-toggle="modal" data-target="#AddProductModal">Add <i class="fas fa-plus"></i></button>
 
-                 <button>Select All <i class="far fa-check-square"></i></button>
+                 <button id="selectAllBtn">Select All <i class="far fa-check-square"></i></button>
 
                  <button>Search <i class="fas fa-search"></i></button>
 
@@ -64,43 +67,43 @@
 
 
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-     
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-     
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      
 
-    </tr>
+
+  <?php
+  $startFromPageNo = 0;
+  $showPerPage = 10;
+  $sql = "select id, part_no, barcode, category, brand, name, description, photo, inventory FROM items limit $startFromPageNo, $showPerPage ;";
+   
+  $SQLresult = $conn->prepare($sql);
+
+  $SQLresult->execute();
+ 
+  while( $SqlRow = $SQLresult->fetch(PDO::FETCH_ASSOC))
+  {
+    echo('<tr>');
+
+    echo('<th scope="row"><input type="checkbox" name="productID'.$SqlRow['id'].'" value="'.$SqlRow['id'].'" class="productCheckBox"/> '.$SqlRow['id'].'</th>');
+    echo('<td> '.$SqlRow['part_no'].' </td>');
+    echo('<td> '.$SqlRow['barcode'].'</td>');
+    echo('<td> '.$SqlRow['category'].'</td>');
+    echo('<td> '.$SqlRow['brand'].' </td>');
+    echo('<td> '.$SqlRow['name'].'</td>');
+    echo('<td> '.$SqlRow['description'].'</td>');
+    echo('<td> <img src="'.$SqlRow['photo'].'" alt="photo" width="200px"/></td>');
+    echo('<td> '.$SqlRow['inventory'].'</td>');
+   
+    echo('</tr>');
+  }
+
+  ?>
+
+    
+      
+     
+     
+   
+    
+   
   </tbody>
 </table>
 
@@ -148,27 +151,31 @@
        
       </div>
       <div class="modal-body">
+
+        <form action="productsList.php" method="post" enctype="multipart/form-data">
+
        <!-------------------------->
        
       <table>
 
         <tr>
           <td> Part Number </td>
-          <td> <input type="text" placeholder="Part Number"/> </td>
+          <td> <input type="text" placeholder="Part Number" name="partNo"/> </td>
        </tr>
          
 
        <tr>
           <td> Barcode </td>
-          <td> <input type="text" placeholder="Barcode"/> </td>
+          <td> <input type="text" placeholder="Barcode" name="Barcode"/> </td>
        </tr>
 
        <tr>
           <td> Category </td>
           <td> 
-            <select>
-              <option>IT Device</option>
-              <option>Lighting Fixures</option>
+            <select name="Category">
+            <option value="Lighting Fixures">Lighting Fixures</option>
+              <option value="IT Device">IT Device</option>
+              
            </select>
          </td>
        </tr>
@@ -176,45 +183,39 @@
 
        <tr>
           <td> Brand </td>
-          <td> <input type="text" placeholder="Brand"/> </td>
+          <td> <input type="text" placeholder="Brand" name="brand"/> </td>
        </tr>
 
        <tr>
           <td> Product Name </td>
-          <td> <input type="text" placeholder="Product Name"/> </td>
+          <td> <input type="text" placeholder="Product Name" name="productName"/> </td>
        </tr>
 
 
        <tr>
           <td> Description </td>
-          <td> <input type="text" placeholder="Description"/> </td>
+          <td> <input type="text" placeholder="Description" name="Description"/> </td>
        </tr>
 
-       <tr>
-          <td> photo </td>
-          <td> <img src="http://ztleds.com/upload/2015-12-18/20151218101816632.gif" width="150px" hight="150px" alt="product photo"/> </td>
-       </tr>
+     
 
 
        <tr>
           <td> Inventory </td>
-          <td> <input type="text" placeholder="Inventory"/> </td>
+          <td> <input type="text" placeholder="Inventory" name="Inventory"/> </td>
        </tr>
 
-       <tr>
-          <td> Datasheet </td>
-          <td> <input type="file" name="datasheet"/> </td>
-       </tr>
+     
 
 
 
        <tr>
           <td> UOM </td>
           <td> 
-            <select>
-              <option>EACH</option>
-              <option>Meter</option>
-              <option>Box</option>
+            <select name="UOM">
+              <option value="EACH">EACH</option>
+              <option value="Meter">Meter</option>
+              <option value="Box">Box</option>
            </select>
          </td>
        </tr>
@@ -222,44 +223,44 @@
 
        <tr>
           <td> Cost </td>
-          <td> <input type="text" placeholder="Cost"/> </td>
+          <td> <input type="text" placeholder="Cost" name="cost"/> </td>
        </tr>
 
        <tr>
           <td> indirect cost </td>
-          <td> <input type="text" placeholder="indirect cost"/> </td>
+          <td> <input type="text" placeholder="indirect cost" name="indirectCost"/> </td>
        </tr>
 
 
        <tr>
           <td> total cost </td>
-          <td> <input type="text" placeholder="total cost"/> </td>
+          <td> <input type="text" placeholder="total cost" name="totalCost"/> </td>
        </tr>
 
        <tr>
           <td> sale price </td>
-          <td> <input type="text" placeholder="sale price"/> </td>
+          <td> <input type="text" placeholder="sale price" name="salePrice"/> </td>
        </tr>
 
 
        <tr>
           <td> profit </td>
-          <td> <input type="text" placeholder="profit"/> </td>
+          <td> <input type="text" placeholder="profit" name="profit"/> </td>
        </tr>
 
        <tr>
           <td> status </td>
-          <td> <input type="text" placeholder="status"/> </td>
+          <td> <input type="text" placeholder="status" name="status"/> </td>
        </tr>
 
 
        <tr>
           <td> environment </td>
           <td> 
-            <select>
-              <option>Indoor</option>
-              <option>Outdoor</option>
-              <option>Industrial</option>
+            <select name="environment">
+              <option value="Indoor">Indoor</option>
+              <option value="Outdoor">Outdoor</option>
+              <option value="Industrial">Industrial</option>
            </select>
          </td>
        </tr>
@@ -267,18 +268,41 @@
 
        <tr>
           <td> Wattage </td>
-          <td> <input type="text" placeholder="Wattage"/> </td>
+          <td> <input type="text" placeholder="Wattage" name="Wattage"/> </td>
        </tr>
 
        <tr>
           <td> Luminous </td>
-          <td> <input type="text" placeholder="Luminous"/> </td>
+          <td> <input type="text" placeholder="Luminous" name="Luminous"/> </td>
        </tr>
 
        <tr>
           <td> Color </td>
-          <td> <input type="text" placeholder="Color"/> </td>
+          <td> <input type="text" placeholder="Color" name="Color"/> </td>
        </tr>
+
+
+
+       <tr>
+          <td> photo </td>
+          <td> <input type="file" name="photo"/> </td>
+       </tr>
+
+       <tr>
+          <td> Datasheet </td>
+          <td> <input type="file" name="datasheet"/> </td>
+       </tr>
+
+       <tr>
+          <td> certificate </td>
+          <td> <input type="file" name="certificate" /> </td>
+       </tr>
+
+       <tr>
+          <td> test report </td>
+          <td> <input type="file" name="testReport"/> </td>
+       </tr>
+
 
       
 
@@ -294,13 +318,143 @@
        <!-------------------------->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save</button>
+        <input type="submit" class="btn btn-primary" value="Save"/>
+        </form>
       </div>
     </div>
 
   </div>
 </div>
 <!------ End Modal --------------------------------------------------->
+
+
+<!-------------you send data to add -------------------->
+
+<?php
+if(isset($_POST["partNo"]))
+{
+
+  
+
+   $target_datasheetFile = "uploads/products/datasheet/".$_POST["partNo"];
+  
+  $target_photoFile = "uploads/products/photo/".$_POST["partNo"];
+
+  $target_certificateFile = "uploads/products/certificate/".$_POST["partNo"];
+
+  $target_testReportFile = "uploads/products/testReport/".$_POST["partNo"];
+
+  // upload photo
+  if(isset($_FILES['photo']))
+  {
+   if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_photoFile ."-".$_FILES["photo"]["name"])) 
+   {
+      $photo = $target_photoFile."-".$_FILES["photo"]["name"];
+   }
+   else
+   {
+      $photo = "";
+   }
+  }
+
+// upload datasheet
+  if(isset($_FILES['datasheet']))
+  {
+   if (move_uploaded_file($_FILES["datasheet"]["tmp_name"], $target_datasheetFile ."-".$_FILES["datasheet"]["name"])) 
+   {
+      $datasheet = $target_datasheetFile."-".$_FILES["datasheet"]["name"];
+   }
+   else
+   {
+      $datasheet = "";
+   }
+  }
+
+
+  // upload certificate
+  if(isset($_FILES['certificate']))
+  {
+   if (move_uploaded_file($_FILES["certificate"]["tmp_name"], $target_certificateFile ."-".$_FILES["certificate"]["name"])) 
+   {
+      $certificate = $target_certificateFile."-".$_FILES["certificate"]["name"];
+   }
+   else
+   {
+      $certificate = "";
+   }
+  }
+
+
+  // test Report
+
+  if(isset($_FILES['testReport']))
+  {
+   if (move_uploaded_file($_FILES["testReport"]["tmp_name"], $target_testReportFile ."-".$_FILES["testReport"]["name"])) 
+   {
+      $testReport = $target_testReportFile."-".$_FILES["testReport"]["name"];
+   }
+   else
+   {
+      $testReport = "";
+   }
+  }
+
+
+
+
+ 
+  $sql = "insert into items (brand, name, description, datasheet, category, barcode, part_no, photo, inventory, UOM, created_date, cost, indirect_cost, total_cost, sale_price, profit, status, environment, wattage, Luminous, Color, certificate, test_report)" .
+          "values( '".$_POST['brand']."' , '".$_POST['productName']."' , '".$_POST['Description']."' , '".$datasheet."' , '".$_POST['Category']."' , '".$_POST['Barcode']."' , '".$_POST['partNo']."' , '".$photo."' , ".$_POST['Inventory']." , '".$_POST['UOM']."' , '".date("Y-m-d")."' ,  ".$_POST["cost"]." , ".$_POST["indirectCost"]." , ".$_POST["totalCost"]." , ".$_POST["salePrice"]." , ".$_POST["profit"]." , '".$_POST["status"]."' , '".$_POST["environment"]."' , '".$_POST["Wattage"]."' , '".$_POST["Luminous"]."' , '".$_POST["Color"]."' , '$certificate', '$testReport' );";
+
+
+ try
+{
+    $SQLresult = $conn->exec($sql);  
+    
+}
+catch (PDOException $e)
+{
+    echo $e->getMessage();
+}
+
+
+//header("Location: productsList.php");
+
+}
+
+
+
+
+?>
+
+<!------------------------------------------------------>
+
+
+
+
+<script>
+   $(document).ready(function() 
+   {
+    
+    const selectAllBtn = document.getElementById('selectAllBtn');
+
+    selectAllBtn.onclick = function()
+    {
+       console.log("you click on select all btn");
+
+      $(".productCheckBox").prop("checked", true);
+
+     
+
+    };
+
+
+    
+
+});
+</script>
+
+
 </body>
 
 
