@@ -38,13 +38,13 @@
                <!-------------------------------->
 
                <div class="CRUDF">
-                 <button data-toggle="modal" data-target="#AddProductModal">Add <i class="fas fa-plus"></i></button>
+                 <button data-toggle="modal" data-target="#AddProductModal" class="CRUDFbutton">Add <i class="fas fa-plus"></i></button>
 
-                 <button id="selectAllBtn">Select All <i class="far fa-check-square"></i></button>
+                 <button id="selectAllBtn" class="CRUDFbutton">Select All <i class="far fa-check-square"></i></button>
 
-                 <button>Search <i class="fas fa-search"></i></button>
+                 <button class="CRUDFbutton">Search <i class="fas fa-search"></i></button>
 
-                 <button>Delete <i class="fas fa-trash"></i></button>
+                 <button class="CRUDFbutton">Delete <i class="fas fa-trash"></i></button>
                 </div>
                <table class="table table-bordered table-hover">
   <thead>
@@ -72,6 +72,27 @@
   <?php
   $startFromPageNo = 0;
   $showPerPage = 10;
+  $totalRecords = 0;
+  $currentPageNo =1;
+
+
+
+
+  if(isset($_GET['showPerPage']))
+  {
+     if($_GET['showPerPage'] != "All")
+     {
+      $showPerPage = $_GET['showPerPage'];
+     }
+     else
+     {
+      $showPerPage = 1000000000;
+     }
+   
+  }
+
+
+
   $sql = "select id, part_no, barcode, category, brand, name, description, photo, inventory FROM items limit $startFromPageNo, $showPerPage ;";
    
   $SQLresult = $conn->prepare($sql);
@@ -109,23 +130,126 @@
 
 <div class="CRUDF">
 
-                 <button>Back <i class="fas fa-step-backward"></i></button>
+<?php
+$sql = "select id from items";
 
-                 Page No : <input type="text" size="5"/> Of 50  
+$SQLresult = $conn->prepare($sql);
+
+$SQLresult->execute();
+
+$totalRecords = $SQLresult->rowCount();
+
+//The ceil() function rounds a number UP to the nearest integer,
+$totalRecords = ceil($totalRecords / $showPerPage);
+
+
+
+
+
+
+
+?>
+
+<form action="productsList.php" method="GET">
+<button onclick="this.form.submit()" class="CRUDFbutton">Back <i class="fas fa-step-backward"></i></button>
+<?php
+
+$McurrentPageNo = $currentPageNo;
+if(isset($_GET["currentPage"]))
+{
+   $McurrentPageNo = $_GET["currentPage"] -1;
+
+   if($McurrentPageNo<=1)
+{
+   $McurrentPageNo =1;
+}
+}
+
+
+
+
+
+
+if(isset($_GET["currentPage"]))
+{
+   if($McurrentPageNo>=1)
+   {
+      $currentPageNo =   $McurrentPageNo;
+   }
+   
+
+
+}
+echo ("<input type='hidden' name='currentPage' value='".$McurrentPageNo."' />");
+//echo ("<input type='hidden' name='showPerPage' id='HselectShowperPage' value='10'/>");
+?>
+</form>
+
+              <form action="productsList.php" method="GET">
+                
+                 <?php
+
+
+if(isset($_GET["currentPage"]))
+{
+  
+      $currentPageNo =   $_GET["currentPage"];
+   
+   
+}
+                        echo('Page No : <input type="text" id="PageNo" size="5" value = "'.$currentPageNo.'"/> Of '.$totalRecords);  
+                 ?>
                  | Show Records Per Page 
-                 <select>
-                   <option>10</option>
-                   <option>20</option>
-                   <option>30</option>
-                   <option>40</option>
-                   <option>All</option>
+                 
+                 <select name="showPerPage" onchange="this.form.submit()"  id="selectShowperPage">
+                   <option value="10">10</option>
+                   <option value="20">20</option>
+                   <option value="30">30</option>
+                   <option value="40">40</option>
+                   <option value="All">All</option>
                   </select>
+                
 
-                 <button>Next <i class="fas fa-step-forward"></i></button>
+                
+                 </form>
 
-               
-                </div>
+
+                 <form action="productsList.php" method="GET">
+                 <button class="CRUDFbutton" onclick="GoNext()">Next <i class="fas fa-step-forward"></i></button>
+                 <?php
+$McurrentPageNo = $currentPageNo +1;
+
+
+
+echo ("<input type='hidden' name='currentPage' value='".$McurrentPageNo."' />");
+echo ("<input type='hidden' name='showPerPage' id='HselectShowperPage' value='10' />");
+if(isset($_GET["currentPage"]))
+{
+  
+      $currentPageNo =   $McurrentPageNo;
+   
+   
+}
+
+?>
+</form>
+</div>
+              
                <!------------------------------->
+
+               <script type="text/javascript">
+              document.getElementById('selectShowperPage').value = "<?php echo $_GET['showPerPage'];?>";
+
+              document.getElementById('HselectShowperPage').value = document.getElementById('selectShowperPage').value;
+
+             /* function GoNext()
+              {
+                 alert("kkk");
+              } */
+
+              </script>
+
+
            </div>
        </div>
    </div>

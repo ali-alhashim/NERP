@@ -19,12 +19,22 @@ body
 {
     padding: 10px;
     margin: 10px;
-    text-align: center;
+    
     background-color: antiquewhite;
     border-radius: 10px;
+   
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    
+   
+   
 }
 
-.CRUDF>button
+
+.CRUDFbutton
 {
     border-style: none;
     border-radius: 10px;
@@ -33,7 +43,7 @@ body
     margin-left: 20px;
     margin-right: 20px;
 }
-.CRUDF>button:hover
+.CRUDFbutton:hover
 {
     background-color: rgb(182, 181, 181);
 }
