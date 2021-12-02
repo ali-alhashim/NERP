@@ -290,7 +290,7 @@ if(isset($_GET["currentPage"]))
 
 
 <!-- Modal ----------------------------------------------------------------------->
-<div id="AddProductModal" class="modal fade" role="dialog">
+<div id="AddProductModal" class="modal fade " role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -300,7 +300,7 @@ if(isset($_GET["currentPage"]))
         <button type="button" class="close" data-dismiss="modal">&times;</button>
        
       </div>
-      <div class="modal-body">
+      <div class="modal-body ">
 
         <form action="productsList.php" method="post" enctype="multipart/form-data">
 
@@ -344,7 +344,9 @@ if(isset($_GET["currentPage"]))
 
        <tr>
           <td> Description </td>
-          <td> <input type="text" placeholder="Description" name="Description"/> </td>
+          <td> <textarea placeholder="Description" name="Description" rows="4" cols="50" class="mr-5">
+              </textarea>
+         </td>
        </tr>
 
      
@@ -435,22 +437,22 @@ if(isset($_GET["currentPage"]))
 
        <tr>
           <td> photo </td>
-          <td> <input type="file" name="photo"/> </td>
+          <td> <input type="file" name="photo" value="null"/> </td>
        </tr>
 
        <tr>
           <td> Datasheet </td>
-          <td> <input type="file" name="datasheet"/> </td>
+          <td> <input type="file" name="datasheet" value="null"/> </td>
        </tr>
 
        <tr>
           <td> certificate </td>
-          <td> <input type="file" name="certificate" /> </td>
+          <td> <input type="file" name="certificate" value="null" /> </td>
        </tr>
 
        <tr>
           <td> test report </td>
-          <td> <input type="file" name="testReport"/> </td>
+          <td> <input type="file" name="testReport" value="null"/> </td>
        </tr>
 
 
@@ -581,20 +583,34 @@ catch (PDOException $e)
 
 
 
-
+<!-----------this js script for select unselect button action-------------------->
 <script>
    $(document).ready(function() 
    {
     
+
     const selectAllBtn = document.getElementById('selectAllBtn');
 
     selectAllBtn.onclick = function()
     {
        console.log("you click on select all btn");
 
-      $(".productCheckBox").prop("checked", true);
-
      
+
+       
+       
+        
+       
+         if($('.productCheckBox').prop('checked'))
+         {
+            $(".productCheckBox").prop("checked", false);
+         }
+         else
+         {
+            $(".productCheckBox").prop("checked", true);
+         }
+
+        
 
     };
 
@@ -603,7 +619,7 @@ catch (PDOException $e)
 
 });
 </script>
-
+<!--------------End js script-------------------------------------------------->
 
 </body>
 

@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `items` (
   `datasheet` VARCHAR(300) NULL,
   `category` VARCHAR(45) NULL COMMENT 'indoor - outdoor - ',
   `barcode` VARCHAR(45) NULL,
-  `part_no` VARCHAR(45) NULL,
+  `part_no` VARCHAR(45) NOT NULL UNIQUE,
   `photo` VARCHAR(300) NULL,
   `inventory` INT NULL,
   `updated_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
