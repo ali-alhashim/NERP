@@ -75,7 +75,26 @@
   $totalRecords = 0;
   $currentPageNo =1;
 
+  //start from use back and next to set the value
+if(isset($_GET["currentPage"]))
+{
+   if($_GET["oldPageNo"] < $_GET["currentPage"])
+   {
+      // we move next
+      $startFromPageNo = $currentPageNo * 10;
+   }
+   else
+   {
+      //we move back
+      $startFromPageNo = ceil($currentPageNo / 10);
 
+      if( $startFromPageNo = 1)
+      {
+         $startFromPageNo =0;
+      }
+   }
+  
+}
 
 
   if(isset($_GET['showPerPage']))
@@ -181,7 +200,8 @@ if(isset($_GET["currentPage"]))
 
 }
 echo ("<input type='hidden' name='currentPage' value='".$McurrentPageNo."' />");
-//echo ("<input type='hidden' name='showPerPage' id='HselectShowperPage' value='10'/>");
+echo ("<input type='hidden' name='showPerPage' id='HselectShowperPage' value='10'/>");
+echo ("<input type='hidden' name='oldPageNo'  value='".$currentPageNo."'/>");
 ?>
 </form>
 
@@ -197,7 +217,7 @@ if(isset($_GET["currentPage"]))
    
    
 }
-                        echo('Page No : <input type="text" id="PageNo" size="5" value = "'.$currentPageNo.'"/> Of '.$totalRecords);  
+                        echo('Page No : <input type="text" id="PageNo" size="5" value = "'.$currentPageNo.'"/> Of '.$totalRecords ." | Total : ". $SQLresult->rowCount());  
                  ?>
                  | Show Records Per Page 
                  
@@ -217,12 +237,18 @@ if(isset($_GET["currentPage"]))
                  <form action="productsList.php" method="GET">
                  <button class="CRUDFbutton" onclick="GoNext()">Next <i class="fas fa-step-forward"></i></button>
                  <?php
-$McurrentPageNo = $currentPageNo +1;
+
+ if($totalRecords >=$currentPageNo +1)  
+ {
+   $McurrentPageNo = $currentPageNo +1;
+ }              
+
 
 
 
 echo ("<input type='hidden' name='currentPage' value='".$McurrentPageNo."' />");
 echo ("<input type='hidden' name='showPerPage' id='HselectShowperPage' value='10' />");
+echo ("<input type='hidden' name='oldPageNo'  value='".$currentPageNo."'/>");
 if(isset($_GET["currentPage"]))
 {
   
