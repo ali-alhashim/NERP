@@ -16,6 +16,11 @@
     <title>
         Product List Page 
     </title>
+
+
+
+
+
 </head>
 
 <body class="bg-light">
@@ -70,6 +75,10 @@
 
 
   <?php
+
+
+
+
   $startFromPageNo = 0;
   $showPerPage = 10;
   $totalRecords = 0;
@@ -110,7 +119,7 @@ if(isset($_GET["currentPage"]))
    
   }
 
-
+  
 
   $sql = "select id, part_no, barcode, category, brand, name, description, photo, inventory FROM items limit $startFromPageNo, $showPerPage ;";
    
@@ -302,7 +311,7 @@ if(isset($_GET["currentPage"]))
       </div>
       <div class="modal-body ">
 
-        <form action="productsList.php" method="post" enctype="multipart/form-data">
+        <form action="AddProductAction.php" method="post" enctype="multipart/form-data">
 
        <!-------------------------->
        
@@ -375,29 +384,29 @@ if(isset($_GET["currentPage"]))
 
        <tr>
           <td> Cost </td>
-          <td> <input type="text" placeholder="Cost" name="cost"/> </td>
+          <td> <input type="text" placeholder="Cost" name="cost" id="Cost"/> </td>
        </tr>
 
        <tr>
           <td> indirect cost </td>
-          <td> <input type="text" placeholder="indirect cost" name="indirectCost"/> </td>
+          <td> <input type="text" placeholder="indirect cost" name="indirectCost" id="IndirectCost"/> </td>
        </tr>
 
 
        <tr>
           <td> total cost </td>
-          <td> <input type="text" placeholder="total cost" name="totalCost"/> </td>
+          <td> <input type="text" placeholder="total cost" name="totalCost" id="TotalCost"/> </td>
        </tr>
 
        <tr>
           <td> sale price </td>
-          <td> <input type="text" placeholder="sale price" name="salePrice"/> </td>
+          <td> <input type="text" placeholder="sale price" name="salePrice" id="SalePrice"/> </td>
        </tr>
 
 
        <tr>
           <td> profit </td>
-          <td> <input type="text" placeholder="profit" name="profit"/> </td>
+          <td> <input type="text" placeholder="profit" name="profit" id="Profit"/> </td>
        </tr>
 
        <tr>
@@ -480,106 +489,7 @@ if(isset($_GET["currentPage"]))
 <!------ End Modal --------------------------------------------------->
 
 
-<!-------------you send data to add -------------------->
 
-<?php
-if(isset($_POST["partNo"]))
-{
-
-  
-
-   $target_datasheetFile = "uploads/products/datasheet/".$_POST["partNo"];
-  
-  $target_photoFile = "uploads/products/photo/".$_POST["partNo"];
-
-  $target_certificateFile = "uploads/products/certificate/".$_POST["partNo"];
-
-  $target_testReportFile = "uploads/products/testReport/".$_POST["partNo"];
-
-  // upload photo
-  if(isset($_FILES['photo']))
-  {
-   if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_photoFile ."-".$_FILES["photo"]["name"])) 
-   {
-      $photo = $target_photoFile."-".$_FILES["photo"]["name"];
-   }
-   else
-   {
-      $photo = "";
-   }
-  }
-
-// upload datasheet
-  if(isset($_FILES['datasheet']))
-  {
-   if (move_uploaded_file($_FILES["datasheet"]["tmp_name"], $target_datasheetFile ."-".$_FILES["datasheet"]["name"])) 
-   {
-      $datasheet = $target_datasheetFile."-".$_FILES["datasheet"]["name"];
-   }
-   else
-   {
-      $datasheet = "";
-   }
-  }
-
-
-  // upload certificate
-  if(isset($_FILES['certificate']))
-  {
-   if (move_uploaded_file($_FILES["certificate"]["tmp_name"], $target_certificateFile ."-".$_FILES["certificate"]["name"])) 
-   {
-      $certificate = $target_certificateFile."-".$_FILES["certificate"]["name"];
-   }
-   else
-   {
-      $certificate = "";
-   }
-  }
-
-
-  // test Report
-
-  if(isset($_FILES['testReport']))
-  {
-   if (move_uploaded_file($_FILES["testReport"]["tmp_name"], $target_testReportFile ."-".$_FILES["testReport"]["name"])) 
-   {
-      $testReport = $target_testReportFile."-".$_FILES["testReport"]["name"];
-   }
-   else
-   {
-      $testReport = "";
-   }
-  }
-
-
-
-
- 
-  $sql = "insert into items (brand, name, description, datasheet, category, barcode, part_no, photo, inventory, UOM, created_date, cost, indirect_cost, total_cost, sale_price, profit, status, environment, wattage, Luminous, Color, certificate, test_report)" .
-          "values( '".$_POST['brand']."' , '".$_POST['productName']."' , '".$_POST['Description']."' , '".$datasheet."' , '".$_POST['Category']."' , '".$_POST['Barcode']."' , '".$_POST['partNo']."' , '".$photo."' , ".$_POST['Inventory']." , '".$_POST['UOM']."' , '".date("Y-m-d")."' ,  ".$_POST["cost"]." , ".$_POST["indirectCost"]." , ".$_POST["totalCost"]." , ".$_POST["salePrice"]." , ".$_POST["profit"]." , '".$_POST["status"]."' , '".$_POST["environment"]."' , '".$_POST["Wattage"]."' , '".$_POST["Luminous"]."' , '".$_POST["Color"]."' , '$certificate', '$testReport' );";
-
-
- try
-{
-    $SQLresult = $conn->exec($sql);  
-    
-}
-catch (PDOException $e)
-{
-    echo $e->getMessage();
-}
-
-
-//header("Location: productsList.php");
-
-}
-
-
-
-
-?>
-
-<!------------------------------------------------------>
 
 
 
@@ -620,6 +530,50 @@ catch (PDOException $e)
 });
 </script>
 <!--------------End js script-------------------------------------------------->
+
+
+<!----------------js script for in time sum total cost--------------------->
+<script>
+   $(document).ready(function() 
+   {
+    
+
+    
+      const cost = document.getElementById('Cost');
+
+      const indirectCost = document.getElementById('IndirectCost');
+
+      const totalCost = document.getElementById('TotalCost');
+
+      const salePrice = document.getElementById('SalePrice');
+
+      const profit = document.getElementById('Profit');
+
+
+      $( "#Cost" ).keyup(function() {
+         
+         totalCost.value = parseFloat(cost.value) + parseFloat(indirectCost.value) ;
+
+      });
+
+      $( "#IndirectCost" ).keyup(function() {
+         
+         totalCost.value = parseFloat(cost.value) + parseFloat(indirectCost.value) ;
+
+      });
+
+
+
+      $( "#SalePrice" ).keyup(function() {
+         
+         profit.value = parseFloat(salePrice.value) - parseFloat(totalCost.value) ;
+
+      });
+
+});
+</script>
+<!-------------------end sum total cost--------------------->
+
 
 </body>
 

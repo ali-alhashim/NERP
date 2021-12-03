@@ -6,7 +6,7 @@
 
 <div class="row h-100">
 
-<div class="col-2  navBAR visible" id="nav-div">
+<div class="col-2  navBAR visible " id="nav-div">
 
 
 
@@ -17,10 +17,12 @@
   <i class="fas fa-times"></i>
 </button>
 
-<nav class="nav navbar " role = "navigation">
+<nav class="nav navbar sticky-top" role = "navigation">
 
 
                 <ul class="justify-content-between nav navbar-nav ">
+
+
                     
                     <li class="nav-tabs"><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                     
