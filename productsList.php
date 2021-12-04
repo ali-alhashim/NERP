@@ -52,9 +52,9 @@
                  <button class="CRUDFbutton">Delete <i class="fas fa-trash"></i></button>
                 </div>
                <table class="table table-bordered table-hover">
-  <thead>
+  <thead class="sticky-top bg-info">
     <tr>
-      <th scope="col">ID</th>
+      <th scope="col"> ID </th>
       <th scope="col">Part No</th>
       <th scope="col">Barcode</th>
       <th scope="col">Category</th>
@@ -121,27 +121,31 @@ if(isset($_GET["currentPage"]))
 
   
 
-  $sql = "select id, part_no, barcode, category, brand, name, description, photo, inventory FROM items limit $startFromPageNo, $showPerPage ;";
+  $sql = "select id, part_no, barcode, category, brand, name, description, photo, datasheet, inventory FROM items limit $startFromPageNo, $showPerPage ;";
    
   $SQLresult = $conn->prepare($sql);
 
   $SQLresult->execute();
  
+  
   while( $SqlRow = $SQLresult->fetch(PDO::FETCH_ASSOC))
   {
+   echo('<form action="productsList.php" method="post">');
     echo('<tr>');
 
-    echo('<th scope="row"><input type="checkbox" name="productID'.$SqlRow['id'].'" value="'.$SqlRow['id'].'" class="productCheckBox"/> '.$SqlRow['id'].'</th>');
+    echo('<th scope="row"> <input type="checkbox" name="productID'.$SqlRow['id'].'" value="'.$SqlRow['id'].'" class="productCheckBox"/>  <input type="submit" value="'.$SqlRow['id'].'" /> </th>');
     echo('<td> '.$SqlRow['part_no'].' </td>');
     echo('<td> '.$SqlRow['barcode'].'</td>');
     echo('<td> '.$SqlRow['category'].'</td>');
     echo('<td> '.$SqlRow['brand'].' </td>');
     echo('<td> '.$SqlRow['name'].'</td>');
     echo('<td> '.$SqlRow['description'].'</td>');
-    echo('<td> <img src="'.$SqlRow['photo'].'" alt="photo" width="200px"/></td>');
+    echo('<td><a href="'.$SqlRow['datasheet'].'"> <img src="'.$SqlRow['photo'].'" alt="photo" width="200px"/></a></td>');
     echo('<td> '.$SqlRow['inventory'].'</td>');
    
     echo('</tr>');
+    echo ("<input type='hidden' name='ViewItem'  value='".$SqlRow['id']."'/>");
+    echo('</form>');
   }
 
   ?>
@@ -298,7 +302,7 @@ if(isset($_GET["currentPage"]))
            ?>   
 
 
-<!-- Modal ----------------------------------------------------------------------->
+<!-- Modal ---------------------add product------------------------------------------->
 <div id="AddProductModal" class="modal fade " role="dialog">
   <div class="modal-dialog">
 
@@ -486,7 +490,61 @@ if(isset($_GET["currentPage"]))
 
   </div>
 </div>
+
+
+
+
 <!------ End Modal --------------------------------------------------->
+
+
+<!------------------------------------------------------->
+
+
+<?php
+
+if(isset($_POST["ViewItem"]))
+{
+   echo "
+   <!-- .modal -->
+   <div class='modal fade' id='popModal'>
+      <div class='modal-dialog modal-lg'>
+         <div class='modal-content'>
+            <div class='modal-header'>
+            <h4 class='modal-title'>
+                      View and Edit item
+                   </h4>                    
+               <button type='button' class='close' data-dismiss='modal'>
+                      &times;
+                   </button> 
+                                                        
+            </div> 
+            <div class='modal-body'>
+               <!----------------here body----------------------->
+               ".$_POST["ViewItem"]."
+               <!------------------------------------------------>
+            </div>   
+            <div class='modal-footer'>
+               <button type='button' class='btn btn-default' data-dismiss='modal'>
+                      Close
+                   </button>
+               <button type='button' class='btn btn-primary'>
+                      Save 
+                   </button>                                 
+            </div>
+         </div>                                                                       
+      </div>                                      
+   </div>
+   ";
+
+   echo "
+   <script>
+$(function() {  $('#popModal').modal('show'); });
+</script>
+   ";
+}
+?>
+
+<!-----------------end edit model------------------------------>
 
 
 
