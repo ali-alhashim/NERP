@@ -110,7 +110,7 @@
     <form action="DBBackupAction.php" method="post">
       <fieldset class="form-group border p-3 m-lg-5 text-center">
         <legend><img src="icons/icons8_database_export_32px.png"> Backup</legend>
-        <input type="submit" value="Backup"/>
+        <input type="submit" value="Backup" class="btn btn-success"/>
       </fieldset>
     </form>
 
@@ -118,7 +118,7 @@
     <form action="DBRestoreAction.php" method="post">
       <fieldset class="form-group border p-3 m-lg-5 text-center">
         <legend><img src="icons/icons8_database_restore_32px.png"> Restore</legend>
-        <input type="submit" value="Restore"/>
+        <input type="submit" value="Restore" class="btn btn-secondary"/>
       </fieldset>
     </form>
 
@@ -126,7 +126,7 @@
     <form action="DBDeleteAction.php" method="post">
       <fieldset class="form-group border p-3 m-lg-5 text-center">
         <legend><img src="icons/icons8_delete_database_32px.png"> Delete</legend>
-        <input type="submit" value="Restore"/>
+        <input type="submit" value="Delete" class="btn btn-danger"/>
       </fieldset>
     </form>
 
