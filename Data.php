@@ -132,6 +132,31 @@
 
 
   </div>
+  <hr>
+  <div class="row  align-self-center w-100">
+    
+   <div class="col-12 w-100 text-center">
+<?php
+
+
+$handle = opendir('Backup');
+ 
+if ($handle) {
+    while (($entry = readdir($handle)) !== FALSE) {
+       
+        if(strpos($entry,".sql") !==FALSE)
+        {
+        echo("<a href='Backup/".$entry."' ><img src='icons/icons8_downloads_32px.png'/>".$entry ."</a>");
+        echo("<hr>");
+        }
+    }
+}
+ 
+closedir($handle);
+
+?>
+</div>
+</div>
 
 
 
