@@ -34,6 +34,7 @@
                <br/>
                <!-------------------------------->
 
+            
                <section >
   <div class="container py-5">
     <div class="row">
@@ -50,7 +51,12 @@
       <div class="col-lg-12">
         <div class="card mb-4">
           <div class="card-body">
-            <div class="row">
+            
+          <form action="#" method="post">
+           <fieldset class="form-group border p-3">
+             <legend> Server Connection </legend>
+
+            <div class="row ">
               <div class="col-sm-3">
                 <p class="mb-0">Server Name</p>
               </div>
@@ -86,14 +92,49 @@
               </div>
             </div>
             <hr>
-            <div class="row text-center">
-                <button class="btn btn-primary ">Connect & Save</button>
+            <div class="row text-center p-3">
+                <input type="submit" class="btn btn-primary "  value="Connect & Save" />
 
                 
               </div>
+
+                </fieldset>
+            </form>
+
             </div>
 
 <!---->
+
+  <div class="row   align-self-center">
+
+    <form action="DBBackupAction.php" method="post">
+      <fieldset class="form-group border p-3 m-lg-5 text-center">
+        <legend><img src="icons/icons8_database_export_32px.png"> Backup</legend>
+        <input type="submit" value="Backup"/>
+      </fieldset>
+    </form>
+
+
+    <form action="DBRestoreAction.php" method="post">
+      <fieldset class="form-group border p-3 m-lg-5 text-center">
+        <legend><img src="icons/icons8_database_restore_32px.png"> Restore</legend>
+        <input type="submit" value="Restore"/>
+      </fieldset>
+    </form>
+
+
+    <form action="DBDeleteAction.php" method="post">
+      <fieldset class="form-group border p-3 m-lg-5 text-center">
+        <legend><img src="icons/icons8_delete_database_32px.png"> Delete</legend>
+        <input type="submit" value="Restore"/>
+      </fieldset>
+    </form>
+
+
+  </div>
+
+
+
 
 
 </section>

@@ -17,7 +17,7 @@
   <i class="fas fa-times"></i>
 </button>
 
-<nav class="nav navbar sticky-top" role = "navigation">
+<nav class="nav navbar sticky-top-15" role = "navigation">
 
 
                 <ul class="justify-content-between nav navbar-nav ">

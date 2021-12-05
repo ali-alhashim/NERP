@@ -89,7 +89,7 @@ a:hover
     cursor: pointer;
     font-size: 20px;
     position: fixed;  
-    z-index: 2;
+    z-index: 3;
 }
 
 .close-btn
@@ -115,9 +115,21 @@ a:hover
     
 }
 
-.sticky-top {
-top:15px !important;
+.sticky-top-10 {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
+
+
+.sticky-top-15 {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 15px;
+    z-index: 1;
+}
+
 
 .close-btn:hover
 {

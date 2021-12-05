@@ -52,11 +52,11 @@
                  <button class="CRUDFbutton">Delete <i class="fas fa-trash"></i></button>
                 </div>
                <table class="table table-bordered table-hover">
-  <thead class="sticky-top bg-info">
+  <thead class="sticky-top-10 bg-info">
     <tr>
-      <th scope="col"> ID </th>
+      <th scope="col"> ID</th>
       <th scope="col">Part No</th>
-      <th scope="col">Barcode</th>
+     
       <th scope="col">Category</th>
       <th scope="col">Brand</th>
       <th scope="col">Name</th>
@@ -135,7 +135,7 @@ if(isset($_GET["currentPage"]))
 
     echo('<th scope="row"> <input type="checkbox" name="productID'.$SqlRow['id'].'" value="'.$SqlRow['id'].'" class="productCheckBox"/>  <input type="submit" value="'.$SqlRow['id'].'" /> </th>');
     echo('<td> '.$SqlRow['part_no'].' </td>');
-    echo('<td> '.$SqlRow['barcode'].'</td>');
+    
     echo('<td> '.$SqlRow['category'].'</td>');
     echo('<td> '.$SqlRow['brand'].' </td>');
     echo('<td> '.$SqlRow['name'].'</td>');
