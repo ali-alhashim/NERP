@@ -115,12 +115,48 @@
     </form>
 
 
-    <form action="DBRestoreAction.php" method="post">
+   
       <fieldset class="form-group border p-3 m-lg-5 text-center">
         <legend><img src="icons/icons8_database_restore_32px.png"> Restore</legend>
-        <input type="submit" value="Restore" class="btn btn-secondary"/>
+        <button   class="btn btn-secondary" data-toggle="modal" data-target="#RestoreModal">Restore </button>
       </fieldset>
-    </form>
+    
+
+
+    <!-------------------------------------->
+     <!-- .modal -->
+   <div class='modal fade' id='RestoreModal' role="dialog">
+      <div class='modal-dialog modal-lg'>
+         <div class='modal-content'>
+            <div class='modal-header'>
+            <h4 class='modal-title'>
+                      Restore Database
+                   </h4>                    
+               <button type='button' class='close' data-dismiss='modal'>
+                      &times;
+                   </button> 
+                                                        
+            </div> 
+            <div class='modal-body'>
+               <!----------------here body----------------------->
+               <form action="DBRestoreAction.php" method="post" enctype="multipart/form-data">
+                 <input type="file" name="RestoreDB"/>
+              
+               <!------------------------------------------------>
+            </div>   
+            <div class='modal-footer'>
+               <button type='button' class='btn btn-default' data-dismiss='modal'>
+                      Close
+                   </button>
+               <input type='submit' class='btn btn-primary' value="Restore " />
+                      
+                      </form>                               
+            </div>
+         </div>                                                                       
+      </div>                                      
+   </div>
+    <!-------------------------------------->
+
 
 
     <form action="DBDeleteAction.php" method="post">

@@ -497,13 +497,20 @@ if(isset($_GET["currentPage"]))
 <!------ End Modal --------------------------------------------------->
 
 
-<!------------------------------------------------------->
+<!-----------------update item---------------------------->
 
 
 <?php
 
 if(isset($_POST["ViewItem"]))
 {
+
+
+   $sql = "select * from items where id =".$_POST["ViewItem"];
+
+   $SQLresult = $conn->query($sql);
+
+   $SqlRow = $SQLresult->fetch(PDO::FETCH_ASSOC);
    echo "
    <!-- .modal -->
    <div class='modal fade' id='popModal'>
@@ -519,17 +526,190 @@ if(isset($_POST["ViewItem"]))
                                                         
             </div> 
             <div class='modal-body'>
+            <form action='updateItem.php' method='post' enctype='multipart/form-data' >
                <!----------------here body----------------------->
-               ".$_POST["ViewItem"]."
+               <a href='".$SqlRow["datasheet"]."'><img src='".$SqlRow["photo"]."' width='200px'/></a>
+               <br/>
+               <div class='row align-self-center text-center'>
+
+               <a href='".$SqlRow["certificate"]."'><img src='icons/icons8_diploma_32px.png'  class='m-lg-5'/></a>
+
+               <a href='".$SqlRow["test_report"]."'><img src='icons/icons8_test_passed_32px.png'  class='m-lg-5'/></a>
+
+               </div>
+               <table>
+
+               <tr>
+                 <td> Part Number </td>
+                 <td> <input type='text' placeholder='Part Number' name='partNo' value='".$SqlRow["part_no"]."'/> </td>
+              </tr>
+                
+       
+              <tr>
+                 <td> Barcode </td>
+                 <td> <input type='text' placeholder='Barcode' name='Barcode' value='".$SqlRow["barcode"]."'/> </td>
+              </tr>
+       
+              <tr>
+                 <td> Category </td>
+                 <td> 
+                   <select name='Category'>
+                   <option value='".$SqlRow["category"]."'>".$SqlRow["category"]."</option>
+                   <option value='Lighting Fixures'>Lighting Fixures</option>
+                     <option value='IT Device'>IT Device</option>
+                     
+                  </select>
+                </td>
+              </tr>
+       
+       
+              <tr>
+                 <td> Brand </td>
+                 <td> <input type='text' placeholder='Brand' name='brand' value='".$SqlRow["brand"]."'/> </td>
+              </tr>
+       
+              <tr>
+                 <td> Product Name </td>
+                 <td> <input type='text' placeholder='Product Name' name='productName' value='".$SqlRow["name"]."'/> </td>
+              </tr>
+       
+       
+              <tr>
+                 <td> Description </td>
+                 <td> <textarea placeholder='Description' name='Description' rows='4' cols='50' class='mr-5'>".$SqlRow["description"]." </textarea>
+                 
+                    
+                </td>
+              </tr>
+       
+            
+       
+       
+              <tr>
+                 <td> Inventory </td>
+                 <td> <input type='text' placeholder='Inventory' name='Inventory' value='".$SqlRow["inventory"]."'/> </td>
+              </tr>
+       
+            
+       
+       
+       
+              <tr>
+                 <td> UOM </td>
+                 <td> 
+                   <select name='UOM'>
+                   <option value='".$SqlRow["UOM"]."'>".$SqlRow["UOM"]."</option>
+                     <option value='EACH'>EACH</option>
+                     <option value='Meter'>Meter</option>
+                     <option value='Box'>Box</option>
+                  </select>
+                </td>
+              </tr>
+       
+       
+              <tr>
+                 <td> Cost </td>
+                 <td> <input type='text' placeholder='Cost' name='cost' id='Cost' value='".$SqlRow["cost"]."'/> </td>
+              </tr>
+       
+              <tr>
+                 <td> indirect cost </td>
+                 <td> <input type='text' placeholder='indirect cost' name='indirectCost' id='IndirectCost' value='".$SqlRow["indirect_cost"]."'/> </td>
+              </tr>
+       
+       
+              <tr>
+                 <td> total cost </td>
+                 <td> <input type='text' placeholder='total cost' name='totalCost' id='TotalCost' value='".$SqlRow["total_cost"]."'/> </td>
+              </tr>
+       
+              <tr>
+                 <td> sale price </td>
+                 <td> <input type='text' placeholder='sale price' name='salePrice' id='SalePrice' value='".$SqlRow["sale_price"]."'/> </td>
+              </tr>
+       
+       
+              <tr>
+                 <td> profit </td>
+                 <td> <input type='text' placeholder='profit' name='profit' id='Profit' value='".$SqlRow["profit"]."'/> </td>
+              </tr>
+       
+              <tr>
+                 <td> status </td>
+                 <td> <input type='text' placeholder='status' name='status' value='".$SqlRow["status"]."'/> </td>
+              </tr>
+       
+       
+              <tr>
+                 <td> environment </td>
+                 <td> 
+                   <select name='environment'>
+                   <option value='".$SqlRow["environment"]."'>".$SqlRow["environment"]." </option>
+                     <option value='Indoor'>Indoor</option>
+                     <option value='Outdoor'>Outdoor</option>
+                     <option value='Industrial'>Industrial</option>
+                  </select>
+                </td>
+              </tr>
+       
+       
+              <tr>
+                 <td> Wattage </td>
+                 <td> <input type='text' placeholder='Wattage' name='Wattage' value='".$SqlRow["wattage"]."'/> </td>
+              </tr>
+       
+              <tr>
+                 <td> Luminous </td>
+                 <td> <input type='text' placeholder='Luminous' name='Luminous' value='".$SqlRow["Luminous"]."'/> </td>
+              </tr>
+       
+              <tr>
+                 <td> Color </td>
+                 <td> <input type='text' placeholder='Color' name='Color' value='".$SqlRow["Color"]."'/> </td>
+              </tr>
+       
+       
+       
+              <tr>
+                 <td> photo </td>
+                 <td> <input type='file' name='photo' value='null'/>  </td>
+              </tr>
+            
+       
+              <tr>
+                 <td> Datasheet </td>
+                 <td> <input type='file' name='datasheet' value='null'/> </td>
+              </tr>
+       
+              <tr>
+                 <td> certificate </td>
+                 <td> <input type='file' name='certificate' value='null' /> </td>
+              </tr>
+       
+              <tr>
+                 <td> test report </td>
+                 <td> <input type='file' name='testReport' value='null'/> </td>
+              </tr>
+       
+       
+             
+       
+       
+       
+       
+       
+       
+       
+       
+             </table> 
                <!------------------------------------------------>
             </div>   
             <div class='modal-footer'>
                <button type='button' class='btn btn-default' data-dismiss='modal'>
                       Close
                    </button>
-               <button type='button' class='btn btn-primary'>
-                      Save 
-                   </button>                                 
+               <input  type='submit' class='btn btn-primary' value='save'/>
+                   </form>                             
             </div>
          </div>                                                                       
       </div>                                      
@@ -544,7 +724,7 @@ $(function() {  $('#popModal').modal('show'); });
 }
 ?>
 
-<!-----------------end edit model------------------------------>
+<!-----------------end edit model--------update item------------------->
 
 
 
