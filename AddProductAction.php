@@ -80,19 +80,42 @@ if(isset($_POST["partNo"]))
           "values( '".$_POST['brand']."' , '".$_POST['productName']."' , '".$_POST['Description']."' , '".$datasheet."' , '".$_POST['Category']."' , '".$_POST['Barcode']."' , '".$_POST['partNo']."' , '".$photo."' , ".$_POST['Inventory']." , '".$_POST['UOM']."' , '".date("Y-m-d")."' ,  ".$_POST["cost"]." , ".$_POST["indirectCost"]." , ".$_POST["totalCost"]." , ".$_POST["salePrice"]." , ".$_POST["profit"]." , '".$_POST["status"]."' , '".$_POST["environment"]."' , '".$_POST["Wattage"]."' , '".$_POST["Luminous"]."' , '".$_POST["Color"]."' , '$certificate', '$testReport' );";
 
 
- try
-{
-    $SQLresult = $conn->exec($sql);  
-    
-}
-catch (PDOException $e)
-{
-    echo $e->getMessage();
-}
-finally
-{
-   header("Location: productsList.php");
-}
+
+// before you add first check if the item exists just increase the inventory and register cost and price in items history table
+
+  $sql2 = "select part_no from items where part_no = '".$_POST["partNo"]."';";
+
+  $Sql2Result = $conn->query($sql2);
+
+  $SqlRow = $Sql2Result->fetch(PDO::FETCH_ASSOC);
+
+  if($SqlRow["part_no"] != null && $SqlRow["part_no"] == $_POST["partNo"])
+
+  {
+     // the item already exists so just increase the inventory ! and add the data to history  
+  }
+  else
+  {
+
+   try
+   {
+       $SQLresult = $conn->exec($sql);  
+       
+   }
+   catch (PDOException $e)
+   {
+       echo $e->getMessage();
+   }
+   finally
+   {
+      header("Location: productsList.php");
+   }
+   
+  }
+
+
+
+ 
 
 
 

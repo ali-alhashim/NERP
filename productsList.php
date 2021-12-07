@@ -527,6 +527,9 @@ if(isset($_POST["ViewItem"]))
             </div> 
             <div class='modal-body'>
             <form action='updateItem.php' method='post' enctype='multipart/form-data' >
+
+            <input type='hidden' value='".$_POST["ViewItem"]."' name='itemID'/>
+
                <!----------------here body----------------------->
                <a href='".$SqlRow["datasheet"]."'><img src='".$SqlRow["photo"]."' width='200px'/></a>
                <br/>
