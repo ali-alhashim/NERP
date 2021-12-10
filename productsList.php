@@ -124,6 +124,26 @@
      {
       $SearchKeyWord = " WHERE  `part_no` LIKE '%".$_POST["SearchKeyWord"]."%'";
      }
+     else if($_POST["Searchselector"] == "Brand")
+     {
+      $SearchKeyWord = " WHERE  `brand` LIKE '%".$_POST["SearchKeyWord"]."%'";
+     }
+     else if($_POST["Searchselector"] == "ProductName")
+     {
+      $SearchKeyWord = " WHERE  `name` LIKE '%".$_POST["SearchKeyWord"]."%'";
+     }
+     else if($_POST["Searchselector"] == "Description")
+     {
+      $SearchKeyWord = " WHERE  `description` LIKE '%".$_POST["SearchKeyWord"]."%'";
+     }
+     else if($_POST["Searchselector"] == "Environment")
+     {
+      $SearchKeyWord = " WHERE  `environment` LIKE '%".$_POST["SearchKeyWord"]."%'";
+     }
+     else if($_POST["Searchselector"] == "Status")
+     {
+      $SearchKeyWord = " WHERE  `status` LIKE '%".$_POST["SearchKeyWord"]."%'";
+     }
   }
 
   //---------------------------

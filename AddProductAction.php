@@ -83,7 +83,7 @@ if(isset($_POST["partNo"]))
 
 // before you add first check if the item exists just increase the inventory and register cost and price in items history table
 
-  $sql2 = "select part_no from items where part_no = '".$_POST["partNo"]."';";
+  $sql2 = "select part_no, inventory from items where part_no = '".$_POST["partNo"]."';";
 
   $Sql2Result = $conn->query($sql2);
 
@@ -92,7 +92,18 @@ if(isset($_POST["partNo"]))
   if($SqlRow["part_no"] != null && $SqlRow["part_no"] == $_POST["partNo"])
 
   {
-     // the item already exists so just increase the inventory ! and add the data to history  
+     // the item already exists so just increase the inventory ! and add the data to history 
+    //+ (int)$_POST['Inventory']
+     $newQauntity = (int)$SqlRow["inventory"] + (int)$_POST['Inventory'] ;
+     
+     $sql3 = "update items set `inventory` =".$newQauntity." where part_no = '".$_POST["partNo"]."';";
+
+     $conn->exec($sql3); 
+
+
+     // Now you need to add to item history table 
+
+     header("Location: productsList.php");
   }
   else
   {
