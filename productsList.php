@@ -1,6 +1,8 @@
 
  <?php
            include "share/_DBconnect.php";
+           session_start();
+          
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +28,9 @@
 <body class="bg-light">
 
 
+  
+     
+     
    
    
            
@@ -42,6 +47,22 @@
                <br/>
                <!-------------------------------->
 
+
+               <?php
+      
+      if(isset($_SESSION['AlertMessage']))
+      {
+        if($_SESSION['AlertMessage'] != null)
+        {
+         echo(' <div class="alert alert-info fade  text-center show" data-alert="alert">'.$_SESSION['AlertMessage'] .'</div>');
+         $_SESSION['AlertMessage'] = null;
+        }
+         
+      }
+     
+                 ?>
+
+
                <div class="CRUDF">
                  <button data-toggle="modal" data-target="#AddProductModal" class="CRUDFbutton">Add <i class="fas fa-plus"></i></button>
 
@@ -49,7 +70,7 @@
 
                  <button class="CRUDFbutton">Search <i class="fas fa-search"></i></button>
 
-                 <button class="CRUDFbutton">Delete <i class="fas fa-trash"></i></button>
+                 <button class="CRUDFbutton" id="DeleteBtn">Delete <i class="fas fa-trash"></i></button>
                 </div>
                <table class="table table-bordered table-hover">
   <thead class="sticky-top-10 bg-info">
@@ -140,7 +161,7 @@ if(isset($_GET["currentPage"]))
     echo('<td> '.$SqlRow['brand'].' </td>');
     echo('<td> '.$SqlRow['name'].'</td>');
     echo('<td> '.$SqlRow['description'].'</td>');
-    echo('<td><a href="'.$SqlRow['datasheet'].'"> <img src="'.$SqlRow['photo'].'" alt="photo" width="200px"/></a></td>');
+    echo('<td><a href="'.$SqlRow['datasheet'].'" target="_blank"> <img src="'.$SqlRow['photo'].'" alt="photo" width="200px"/></a></td>');
     echo('<td> '.$SqlRow['inventory'].'</td>');
    
     echo('</tr>');
@@ -531,16 +552,29 @@ if(isset($_POST["ViewItem"]))
             <input type='hidden' value='".$_POST["ViewItem"]."' name='itemID'/>
 
                <!----------------here body----------------------->
-               <a href='".$SqlRow["datasheet"]."'><img src='".$SqlRow["photo"]."' width='200px'/></a>
+               <a href='".$SqlRow["datasheet"]."' target='_blank'><img src='".$SqlRow["photo"]."' width='200px'/></a>
                <br/>
                <div class='row align-self-center text-center'>
 
-               <a href='".$SqlRow["certificate"]."'><img src='icons/icons8_diploma_32px.png'  class='m-lg-5'/></a>
+               <a href='".$SqlRow["certificate"]."' target='_blank'><img src='icons/icons8_diploma_32px.png'  class='m-lg-5'/></a>
 
-               <a href='".$SqlRow["test_report"]."'><img src='icons/icons8_test_passed_32px.png'  class='m-lg-5'/></a>
+               <a href='".$SqlRow["test_report"]."' target='_blank'><img src='icons/icons8_test_passed_32px.png'  class='m-lg-5'/></a>
 
                </div>
                <table>
+
+
+               <tr>
+               <td> Created Date </td>
+               <td> <input type='text'  name='CreatedDate' value='".$SqlRow["created_date"]."' disabled /> </td>
+              </tr>
+
+
+              <tr>
+              <td> Last Update Date </td>
+              <td> <input type='text'  name='LastUpdateDate' value='".$SqlRow["updated_date"]."' disabled /> </td>
+             </tr>
+
 
                <tr>
                  <td> Part Number </td>
@@ -623,7 +657,7 @@ if(isset($_POST["ViewItem"]))
        
               <tr>
                  <td> total cost </td>
-                 <td> <input type='text' placeholder='total cost' name='totalCost' id='TotalCost' value='".$SqlRow["total_cost"]."'/> </td>
+                 <td> <input type='text' placeholder='total cost' name='TotalCost' id='TotalCost' value='".$SqlRow["total_cost"]."'/> </td>
               </tr>
        
               <tr>
@@ -712,6 +746,7 @@ if(isset($_POST["ViewItem"]))
                       Close
                    </button>
                <input  type='submit' class='btn btn-primary' value='save'/>
+
                    </form>                             
             </div>
          </div>                                                                       
@@ -814,6 +849,36 @@ $(function() {  $('#popModal').modal('show'); });
 });
 </script>
 <!-------------------end sum total cost--------------------->
+
+<!--------------delete select item js ---------------->
+
+<script>
+
+$(document).ready(function(){
+   $("#DeleteBtn").click(function(){
+
+      var checkedValues = $('input:checkbox:checked').map((i, el) => el.value).get();
+      
+      if(confirm("Do you want to Delete the select items with IDs" + checkedValues) == true)
+      {
+         // create form and add all ids to the form
+         // send the items to DeleteItemsAction.php
+         //document.write("<form action = 'DeleteItemsAction.php' method ='post'>");
+        
+          $.post("DeleteItemsAction.php", {itemsIDs: JSON.stringify(checkedValues)});
+          
+         
+
+         
+
+      }
+
+   });
+
+});
+
+</script>
+<!----------------------------------------------------->
 
 
 </body>

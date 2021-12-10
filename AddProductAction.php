@@ -9,13 +9,13 @@ if(isset($_POST["partNo"]))
 
   
 
-   $target_datasheetFile = "uploads/products/datasheet/".$_POST["partNo"];
+   $target_datasheetFile = "uploads/products/datasheet/".str_replace("/","-",$_POST["partNo"]);
   
-  $target_photoFile = "uploads/products/photo/".$_POST["partNo"];
+  $target_photoFile = "uploads/products/photo/".str_replace("/","-",$_POST["partNo"]);
 
-  $target_certificateFile = "uploads/products/certificate/".$_POST["partNo"];
+  $target_certificateFile = "uploads/products/certificate/".str_replace("/","-",$_POST["partNo"]);
 
-  $target_testReportFile = "uploads/products/testReport/".$_POST["partNo"];
+  $target_testReportFile = "uploads/products/testReport/".str_replace("/","-",$_POST["partNo"]);
 
   // upload photo
   if(isset($_FILES['photo']))
