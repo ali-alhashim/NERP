@@ -68,7 +68,7 @@
 
                  <button id="selectAllBtn" class="CRUDFbutton">Select All <i class="far fa-check-square"></i></button>
 
-                 <button class="CRUDFbutton">Search <i class="fas fa-search"></i></button>
+                 <button class="CRUDFbutton" id="SearchBtn" data-toggle="modal" data-target="#SearchProductModal">Search <i class="fas fa-search"></i></button>
 
                  <button class="CRUDFbutton" id="DeleteBtn">Delete <i class="fas fa-trash"></i></button>
                 </div>
@@ -104,6 +104,31 @@
   $showPerPage = 10;
   $totalRecords = 0;
   $currentPageNo =1;
+
+  $SearchKeyWord = " ";
+
+
+  // search ----------------------
+
+  if(isset($_POST["SearchKeyWord"]))
+  {
+     if($_POST["Searchselector"] == "All")
+     {
+      $SearchKeyWord = " WHERE  `part_no` LIKE '%".$_POST["SearchKeyWord"]."%' OR `brand` LIKE '%".$_POST["SearchKeyWord"]."%' OR `description` LIKE '%".$_POST["SearchKeyWord"]."%'";
+     }
+     else if($_POST["Searchselector"] == "ID")
+     {
+      $SearchKeyWord = " WHERE  `id` =".$_POST["SearchKeyWord"]; 
+     }
+     else if($_POST["Searchselector"] == "PartNo")
+     {
+      $SearchKeyWord = " WHERE  `part_no` LIKE '%".$_POST["SearchKeyWord"]."%'";
+     }
+  }
+
+  //---------------------------
+
+
 
   //start from use back and next to set the value
 if(isset($_GET["currentPage"]))
@@ -142,7 +167,7 @@ if(isset($_GET["currentPage"]))
 
   
 
-  $sql = "select id, part_no, barcode, category, brand, name, description, photo, datasheet, inventory FROM items limit $startFromPageNo, $showPerPage ;";
+  $sql = "select id, part_no, barcode, category, brand, name, description, photo, datasheet, inventory FROM items $SearchKeyWord limit $startFromPageNo, $showPerPage ;";
    
   $SQLresult = $conn->prepare($sql);
 
@@ -321,6 +346,50 @@ if(isset($_GET["currentPage"]))
     <?php
            include "share/_footer.php";
            ?>   
+
+
+
+<!-- Modal SearchProductModal ------------------------------------------------------------>
+
+<div id="SearchProductModal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+         <h4 class="modal-title"> Search </h4>
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+         <form method="post" action="productsList.php">
+            <div class="row">
+               <div class="col-6">
+         <input type="text" name="SearchKeyWord" placeholder="Search" class="form-control"/>
+            </div>
+
+            <div class="col-6">
+         <select class="form-control" name="Searchselector">
+            <option value="All"> All </option>
+            <option value="ID"> ID </option>
+            <option value="PartNo">Part Number</option>
+            <option value="Brand">Brand </option>
+            <option value="ProductName">Product Name </option>
+            <option value="Description"> Description </option>
+            <option value="Environment"> environment </option>
+            <option value="Status"> status </option>
+         </select>
+            </div>
+            </div>
+      </div>
+
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Search"/>
+        </form>
+      </div>
+            </div>
+   </div>
+</div>   
+
+<!---------------------------------------------------------------------------------------->
 
 
 <!-- Modal ---------------------add product------------------------------------------->
