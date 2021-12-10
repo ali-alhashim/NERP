@@ -861,14 +861,14 @@ $(document).ready(function(){
       
       if(confirm("Do you want to Delete the select items with IDs" + checkedValues) == true)
       {
-         // create form and add all ids to the form
-         // send the items to DeleteItemsAction.php
-         //document.write("<form action = 'DeleteItemsAction.php' method ='post'>");
+         // here we send in background to DeleteItemAction.php page the Ids Array 
         
           $.post("DeleteItemsAction.php", {itemsIDs: JSON.stringify(checkedValues)});
           
-         
-
+          // reload the page after 5000 MS
+          setTimeout(function(){
+         window.location.reload(1);
+          }, 5000);
          
 
       }
