@@ -103,6 +103,10 @@ if(isset($_POST["partNo"]))
 
      // Now you need to add to item history table 
 
+     $sql3 = "insert into items_prices_history (`items_id`,`update_date`,`new_price`) values(".$SqlRow['id'].", '".date("Y-m-d")."',".$_POST["cost"]." );";
+     $conn->exec($sql3); 
+
+
      header("Location: productsList.php");
   }
   else

@@ -163,6 +163,13 @@ else
         $conn->exec($sql);
       
         $_SESSION["AlertMessage"]  = "Your Item has been successfully updated";
+
+
+
+        // add item price to the items_prices_history
+
+        $sql3 = "insert into items_prices_history (`items_id`,`update_date`,`new_price`) values(".$_POST["itemID"].", '".date("Y-m-d")."',".$_POST["cost"]." );";
+        $conn->exec($sql3); 
         
     }
     catch(PDOException $e)
